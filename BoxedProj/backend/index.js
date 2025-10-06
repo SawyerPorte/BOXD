@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 app.use(cors({
-    origin: "*"  // or specific URL for production
+    origin: "https://boxd-5hg1.onrender.com"  // or specific URL for production
 }));
 
 // Serve frontend files
@@ -89,6 +89,6 @@ app.get('/daily-box', (req, res) => {
 
 
 // ---- START SERVER ----
-const PORT = 3000;
-app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

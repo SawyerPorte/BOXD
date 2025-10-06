@@ -45,12 +45,12 @@ for (let i = 0; i < 25; i++) {
 
 // Load daily box and word list from backend
 async function loadDailyBox() {
-    const res = await fetch("http://localhost:3000/daily-box");
+    const res = await fetch("https://yourfrontend.netlify.app/daily-box");
     dailyBox = await res.json();
     console.log("Daily Box:", dailyBox);
 
     // Fetch all words for validation
-    const wordsRes = await fetch("http://localhost:3000/words-list");
+    const wordsRes = await fetch("https://yourfrontend.netlify.app/words-list");
     wordsList = await wordsRes.json();
 }
 
