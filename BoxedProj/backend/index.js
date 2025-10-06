@@ -4,7 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+    origin: "*"  // or specific URL for production
+}));
 
 // Serve frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));
