@@ -14,8 +14,8 @@ const frontendPath = path.join(__dirname, '../frontend');
 app.use(express.static(frontendPath));
 
 // Catch-all for SPA routing
-app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
+app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // ---- WORD GENERATION LOGIC ----
