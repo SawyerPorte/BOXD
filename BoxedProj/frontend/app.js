@@ -1,4 +1,4 @@
-﻿//const fs = require('fs');
+﻿
 
 let dailyBox = {};
 let wordsList = [];
