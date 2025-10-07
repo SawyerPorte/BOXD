@@ -1,5 +1,5 @@
 ﻿let dailyBox = {};
-let wordsList = [];
+
 const maxGuesses = 26; // optional, can be set to 26 letters
 let guessCount = 0;
 let words = [];
@@ -217,4 +217,3 @@ function updateKeyboardColors(letter) {
 
     key.style.backgroundColor = correct ? "green" : "#555";
 }
-
