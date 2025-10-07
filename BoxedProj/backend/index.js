@@ -15,9 +15,9 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, "public")));
 
 // Catch-all to serve index.html for any unknown route (for client-side routing)
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+//app.get("/*", (req, res) => {
+//    res.sendFile(path.join(__dirname, "public", "index.html"));
+//});
 
 
 // ---- WORD GENERATION LOGIC ----
