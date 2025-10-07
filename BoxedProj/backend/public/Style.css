@@ -126,25 +126,25 @@ ul {
 
 @media (max-width: 600px) {
     #grid {
-        grid-template-columns: repeat(5, 60px); /* wider cells */
-        grid-template-rows: repeat(5, 60px);
-        gap: 6px;
+        grid-template-columns: repeat(5, 12vw);
+        grid-template-rows: repeat(5, 12vw);
+        gap: 1vw;
     }
 
     .cell {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
+        width: 12vw;
+        height: 12vw;
+        font-size: 5vw;
     }
 
     #current-letter {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
+        width: 12vw;
+        height: 12vw;
+        font-size: 5vw;
     }
 
     #keyboard button.key {
-        padding: 10px 12px;
-        font-size: 18px;
+        padding: 2vw 3vw;
+        font-size: 4vw;
     }
 }
