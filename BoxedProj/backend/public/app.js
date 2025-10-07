@@ -34,11 +34,11 @@ for (let i = 0; i < 25; i++) {
     cells.push(cell);
 }
 
-// Single-letter current guess display
-const letterBox = document.createElement("div");
-letterBox.id = "current-letter";
-letterBox.className = "cell";
-grid.parentNode.insertBefore(letterBox, grid);
+//// Single-letter current guess display
+//const letterBox = document.createElement("div");
+//letterBox.id = "current-letter";
+//letterBox.className = "cell";
+//grid.parentNode.insertBefore(letterBox, grid);
 
 // Load word list
 async function loadWordList() {
