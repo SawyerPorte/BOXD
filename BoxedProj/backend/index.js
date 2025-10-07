@@ -11,8 +11,13 @@ app.use(cors({
 }));
 
 
+// Serve all frontend files
 app.use(express.static(path.join(__dirname, "public")));
-// Catch-all for SPA routing
+
+// Catch-all to serve index.html for any unknown route (for client-side routing)
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 
 // ---- WORD GENERATION LOGIC ----
