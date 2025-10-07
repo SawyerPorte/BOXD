@@ -10,8 +10,12 @@ app.use(cors({
     origin: "https://boxd-5hg1.onrender.com"  // or specific URL for production
 }));
 
-// Serve frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));
+
+// Serve index.html on root
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 // ---- WORD GENERATION LOGIC ----
 //let words = JSON.parse(fs.readFileSync('./words.json', 'utf8')).map(w => w.toUpperCase());
