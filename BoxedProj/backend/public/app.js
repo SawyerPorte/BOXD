@@ -6,6 +6,7 @@ let words = [];
 let guessedLetters = []; // add this at the top with other variables
 const grid = document.getElementById("grid");
 const guessesList = document.getElementById("guesses");
+const keyboard = document.getElementById("keyboard")
 
 let currentLetter = "";
 let cells = [];
@@ -38,7 +39,7 @@ for (let i = 0; i < 25; i++) {
 const letterBox = document.createElement("div");
 letterBox.id = "current-letter";
 letterBox.className = "cell";
-grid.parentNode.insertAfter(letterBox, grid);
+grid.parentNode.insertBefore(letterBox, keyboard);
 
 // Load word list
 async function loadWordList() {
