@@ -53,10 +53,10 @@ async function loadDailyBox() {
     dailyBox = await res.json();
     console.log("Daily Box:", dailyBox);
 
-    // Fetch the word list from your backend
-    const wordsRes = await fetch("https://boxd-5hg1.onrender.com/words.json");
-    wordsList = await wordsRes.json();
-    wordsList = wordsList.map(w => w.toUpperCase());
+    //// Fetch the word list from your backend
+    //const wordsRes = await fetch("https://boxd-5hg1.onrender.com/words.json");
+    //wordsList = await wordsRes.json();
+    //wordsList = wordsList.map(w => w.toUpperCase());
 }
 
 loadDailyBox();
