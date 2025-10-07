@@ -1,13 +1,13 @@
 ﻿let dailyBox = {};
-//let wordsList = [];
-const maxGuesses = 5;
+let wordsList = [];
+const maxGuesses = 26; // optional, can be set to 26 letters
 let guessCount = 0;
 let words = [];
 
 const grid = document.getElementById("grid");
 const guessesList = document.getElementById("guesses");
 
-let currentGuess = [];
+let currentLetter = "";
 let cells = [];
 
 // Map grid positions
@@ -34,10 +34,11 @@ for (let i = 0; i < 25; i++) {
     cells.push(cell);
 }
 
-// Current guess display
-const currentGuessRow = document.createElement("div");
-currentGuessRow.id = "current-guess";
-grid.parentNode.insertBefore(currentGuessRow, grid);
+// Single-letter current guess display
+const letterBox = document.createElement("div");
+letterBox.id = "current-letter";
+letterBox.className = "cell";
+grid.parentNode.insertBefore(letterBox, grid);
 
 // Load word list
 async function loadWordList() {
@@ -55,15 +56,9 @@ async function loadDailyBox() {
 }
 loadDailyBox();
 
-// Update current guess display
-function updateCurrentGuessDisplay() {
-    currentGuessRow.innerHTML = "";
-    for (let i = 0; i < 5; i++) {
-        const cell = document.createElement("div");
-        cell.className = "cell";
-        cell.textContent = currentGuess[i] || "";
-        currentGuessRow.appendChild(cell);
-    }
+// Update the single-letter box
+function updateCurrentLetterDisplay() {
+    letterBox.textContent = currentLetter;
 }
 
 // Keyboard setup
@@ -111,39 +106,32 @@ function createKeyboard() {
 }
 createKeyboard();
 
+// Add letter
 function addLetter(letter) {
-    if (currentGuess.length < 5) {
-        currentGuess.push(letter);
-        updateCurrentGuessDisplay();
-    }
+    currentLetter = letter.toUpperCase();
+    updateCurrentLetterDisplay();
 }
 
+// Remove letter
 function removeLetter() {
-    currentGuess.pop();
-    updateCurrentGuessDisplay();
+    currentLetter = "";
+    updateCurrentLetterDisplay();
 }
 
-// Handle guesses
+// Handle guess
 function handleGuess() {
-    if (currentGuess.length !== 5) {
-        alert("Guess must be 5 letters!");
-        return;
-    }
-
-    const guess = currentGuess.join("").toUpperCase();
-
-    if (!words.includes(guess)) {
-        alert("Word not in list!");
+    if (!currentLetter) {
+        alert("Please select a letter!");
         return;
     }
 
     guessCount++;
-    revealGuessLetters(guess);
-    updateKeyboardColors(guess);
-    addGuessToList(guess);
+    revealGuessLetter(currentLetter);
+    updateKeyboardColors(currentLetter);
+    addGuessToList(currentLetter);
 
-    currentGuess = [];
-    updateCurrentGuessDisplay();
+    currentLetter = "";
+    updateCurrentLetterDisplay();
 
     if (checkWin()) {
         revealAll();
@@ -152,26 +140,26 @@ function handleGuess() {
         return;
     }
 
-    //if (guessCount >= maxGuesses) {
-    //    revealAll();
-    //    alert("Game over! Check all correct letters on the grid.");
-    //    disableKeyboard();
-    //}
+    if (guessCount >= maxGuesses) {
+        revealAll();
+        alert("Game over! Check all correct letters on the grid.");
+        disableKeyboard();
+    }
 }
 
-// Reveal letters in the grid
-function revealGuessLetters(guess) {
+// Reveal letter in the grid
+function revealGuessLetter(letter) {
     ["top", "left", "right", "bottom"].forEach(pos => {
         const word = dailyBox[pos];
         for (let i = 0; i < 5; i++) {
             const index = gridMap[pos][i];
-            const letter = word[i];
+            const wordLetter = word[i];
 
-            if (guess[i] === letter) {
-                cells[index].textContent = letter;
+            if (wordLetter === letter) {
+                cells[index].textContent = wordLetter;
                 cells[index].style.backgroundColor = "green";
-            } else if (guess.includes(letter)) {
-                cells[index].textContent = letter;
+            } else if (word.includes(letter) && !cells[index].textContent) {
+                cells[index].textContent = wordLetter;
                 cells[index].style.backgroundColor = "goldenrod";
             }
         }
@@ -179,9 +167,9 @@ function revealGuessLetters(guess) {
 }
 
 // Add guess to list
-function addGuessToList(guess) {
+function addGuessToList(letter) {
     const li = document.createElement("li");
-    li.textContent = guess;
+    li.textContent = letter;
     guessesList.appendChild(li);
 }
 
@@ -213,28 +201,20 @@ function disableKeyboard() {
     document.querySelectorAll(".key").forEach(k => k.disabled = true);
 }
 
-// Color the keyboard based on guess
-function updateKeyboardColors(guess) {
-    guess.split("").forEach(letter => {
-        const key = [...document.querySelectorAll(".key")].find(k => k.textContent === letter);
-        if (!key) return;
+// Keyboard color
+function updateKeyboardColors(letter) {
+    const key = [...document.querySelectorAll(".key")].find(k => k.textContent === letter);
+    if (!key) return;
 
-        let correct = false;
-        let exists = false;
+    let correct = false;
 
-        ["top", "left", "right", "bottom"].forEach(pos => {
-            const word = dailyBox[pos];
-            for (let i = 0; i < 5; i++) {
-                if (word[i] === letter) {
-                    exists = true;
-                    if (guess[i] === word[i]) correct = true;
-                }
-            }
-        });
-
-        if (correct) key.style.backgroundColor = "green";
-        else if (exists) key.style.backgroundColor = "goldenrod";
-        else key.style.backgroundColor = "#555";
+    ["top", "left", "right", "bottom"].forEach(pos => {
+        const word = dailyBox[pos];
+        for (let i = 0; i < 5; i++) {
+            if (word[i] === letter) correct = true;
+        }
     });
+
+    key.style.backgroundColor = correct ? "green" : "#555";
 }
 
