@@ -1,7 +1,7 @@
 ﻿
 
 let dailyBox = {};
-//let wordsList = [];
+let wordsList = [];
 const maxGuesses = 5;
 let guessCount = 0;
 let words = [];
@@ -10,6 +10,9 @@ const grid = document.getElementById("grid");
 const guessInput = document.getElementById("guessInput");
 const guessBtn = document.getElementById("guessBtn");
 const guessesList = document.getElementById("guesses");
+
+
+
 
 async function loadWordList() {
     const res = await fetch("wordsList.json"); // must be in same folder
@@ -45,13 +48,15 @@ for (let i = 0; i < 25; i++) {
 
 // Load daily box and word list from backend
 async function loadDailyBox() {
-    const res = await fetch("https://yourfrontend.netlify.app/daily-box");
+    // Fetch the daily box from your backend
+    const res = await fetch("https://boxd-5hg1.onrender.com/daily-box");
     dailyBox = await res.json();
     console.log("Daily Box:", dailyBox);
 
-    // Fetch all words for validation
-    const wordsRes = await fetch("https://yourfrontend.netlify.app/words-list");
+    // Fetch the word list from your backend
+    const wordsRes = await fetch("https://boxd-5hg1.onrender.com/words.json");
     wordsList = await wordsRes.json();
+    wordsList = wordsList.map(w => w.toUpperCase());
 }
 
 loadDailyBox();
