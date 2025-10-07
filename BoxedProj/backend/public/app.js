@@ -87,15 +87,15 @@ guessInput.addEventListener("keydown", (e) => {
 function handleGuess() {
     const guess = guessInput.value.toUpperCase();
     
-    if (guess.length !== 5) {
-        alert("Guess must be 5 letters!");
-        return;
-    }
+    //if (guess.length !== 5) {
+    //    alert("Guess must be 5 letters!");
+    //    return;
+    //}
 
-    if (!words.includes(guess)) {
-        alert("Word not in list!");
-        return;
-    }
+    //if (!words.includes(guess)) {
+    //    alert("Word not in list!");
+    //    return;
+    //}
 
     guessCount++;
     revealGuessLetters(guess);
@@ -116,12 +116,12 @@ function handleGuess() {
         return;
     }
 
-    if (guessCount >= maxGuesses) {
-        guessInput.disabled = true;
-        guessBtn.disabled = true;
-        revealAll();
-        alert("Game over! Check all correct letters on the grid.");
-    }
+    //if (guessCount >= maxGuesses) {
+    //    guessInput.disabled = true;
+    //    guessBtn.disabled = true;
+    //    revealAll();
+    //    alert("Game over! Check all correct letters on the grid.");
+    //}
 }
 
 
@@ -148,3 +148,60 @@ function revealAll() {
         }
     });
 }
+
+const keyboardLayout = [
+    "QWERTYUIOP",
+    "ASDFGHJKL",
+    "ZXCVBNM"
+];
+
+function createKeyboard() {
+    const keyboard = document.getElementById("keyboard");
+
+    keyboardLayout.forEach(row => {
+        const rowDiv = document.createElement("div");
+        rowDiv.classList.add("keyboard-row");
+
+        for (const letter of row) {
+            const key = document.createElement("button");
+            key.textContent = letter;
+            key.classList.add("key");
+            key.addEventListener("click", () => addLetter(letter));
+            rowDiv.appendChild(key);
+        }
+
+        keyboard.appendChild(rowDiv);
+    });
+
+    // Add Enter and Backspace row
+    const controlRow = document.createElement("div");
+    controlRow.classList.add("keyboard-row");
+
+    const backKey = document.createElement("button");
+    backKey.textContent = "⌫";
+    backKey.classList.add("key", "special");
+    backKey.addEventListener("click", removeLetter);
+
+    const enterKey = document.createElement("button");
+    enterKey.textContent = "ENTER";
+    enterKey.classList.add("key", "special");
+    enterKey.addEventListener("click", () => handleGuess());
+
+    controlRow.appendChild(backKey);
+    controlRow.appendChild(enterKey);
+    keyboard.appendChild(controlRow);
+}
+
+function addLetter(letter) {
+    const input = document.getElementById("guessInput");
+    if (input.value.length < 5) {
+        input.value += letter;
+    }
+}
+
+function removeLetter() {
+    const input = document.getElementById("guessInput");
+    input.value = input.value.slice(0, -1);
+}
+
+createKeyboard();

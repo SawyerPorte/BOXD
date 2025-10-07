@@ -18,6 +18,40 @@ body {
     gap: 5px;
     margin-bottom: 20px;
 }
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.key {
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+    .key:hover {
+        background-color: #666;
+    }
+
+    .key.special {
+        background-color: #555;
+        font-size: 16px;
+        padding: 10px 20px;
+    }
 
 .cell {
     border: 1px solid white;

@@ -13,8 +13,11 @@
     <div id="game-container">
         <div id="grid"></div>
 
-        <input id="guessInput" placeholder="Enter your guess" maxlength="5" />
-        <button id="guessBtn">Guess</button>
+        <!-- Hidden input for compatibility -->
+        <input id="guessInput" type="text" maxlength="5" style="opacity:0; position:absolute; pointer-events:none;">
+        <button id="guessBtn" style="display:none;">Guess</button>
+
+        <div id="keyboard"></div>
 
         <h2>Your Guesses:</h2>
         <ul id="guesses"></ul>
