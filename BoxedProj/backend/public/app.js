@@ -3,13 +3,12 @@
 const maxGuesses = 26; // optional, can be set to 26 letters
 let guessCount = 0;
 let words = [];
-
+let guessedLetters = []; // add this at the top with other variables
 const grid = document.getElementById("grid");
 const guessesList = document.getElementById("guesses");
 
 let currentLetter = "";
 let cells = [];
-let guessedLetters = [];
 
 // Map grid positions
 const gridMap = {
@@ -162,11 +161,12 @@ function revealGuessLetter(letter) {
     });
 }
 
-// Add guess to list
+
+
+// Replace your old addGuessToList function with this:
 function addGuessToList(letter) {
-    guessedLetters.push(letter); // store the guessed letter
-    const display = document.getElementById("guessed-letters");
-    display.textContent = guessedLetters.join(", "); // show letters with commas
+    guessedLetters.push(letter); // store guessed letters
+    guessesList.textContent = guessedLetters.join(", "); // show letters horizontally with commas
 }
 // Check win
 function checkWin() {

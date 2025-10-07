@@ -10,6 +10,12 @@ body {
     flex-direction: column;
     align-items: center;
 }
+#guesses {
+    margin-top: 20px;
+    font-size: 18px;
+    color: white;
+    text-align: center; /* center the letters */
+}
 
 #grid {
     display: grid;
