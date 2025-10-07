@@ -40,8 +40,9 @@ function seededRandom(seed) {
     return x - Math.floor(x);
 }
 function getDailySeed() {
-    const today = new Date();
-    return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000); // adjust to local time
+    return local.getFullYear() * 10000 + (local.getMonth() + 1) * 100 + local.getDate();
 }
 function pickRandomFromList(list, seed) {
     if (list.length === 0) return null;
