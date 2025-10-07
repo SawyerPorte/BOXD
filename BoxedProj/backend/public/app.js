@@ -1,7 +1,7 @@
 ﻿
 
 let dailyBox = {};
-let wordsList = [];
+//let wordsList = [];
 const maxGuesses = 5;
 let guessCount = 0;
 let words = [];
