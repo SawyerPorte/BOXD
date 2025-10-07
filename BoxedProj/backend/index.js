@@ -3,6 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 
+
 const app = express();
 
 app.use(cors({
@@ -13,7 +14,11 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ---- WORD GENERATION LOGIC ----
-let words = JSON.parse(fs.readFileSync('./words.json', 'utf8')).map(w => w.toUpperCase());
+//let words = JSON.parse(fs.readFileSync('./words.json', 'utf8')).map(w => w.toUpperCase());
+// Use __dirname to get the path of the current file (index.js)
+const wordsPath = path.join(__dirname, 'words.json');
+let words = JSON.parse(fs.readFileSync(wordsPath, 'utf8')).map(w => w.toUpperCase());
+
 
 function filterByStart(words, letter) {
     return words.filter(w => w[0] === letter);
