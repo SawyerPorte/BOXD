@@ -105,13 +105,11 @@ function createKeyboard() {
     keyboard.appendChild(controlRow);
 }
 createKeyboard();
-
 // Add letter
 function addLetter(letter) {
     currentLetter = letter.toUpperCase();
     updateCurrentLetterDisplay();
 }
-
 // Remove letter
 function removeLetter() {
     currentLetter = "";
@@ -146,7 +144,6 @@ function handleGuess() {
         disableKeyboard();
     }
 }
-
 // Reveal letter in the grid
 function revealGuessLetter(letter) {
     ["top", "left", "right", "bottom"].forEach(pos => {
@@ -158,10 +155,8 @@ function revealGuessLetter(letter) {
             if (wordLetter === letter) {
                 cells[index].textContent = wordLetter;
                 cells[index].style.backgroundColor = "green";
-            } else if (word.includes(letter) && !cells[index].textContent) {
-                cells[index].textContent = wordLetter;
-                cells[index].style.backgroundColor = "goldenrod";
             }
+            // Do NOT reveal letters that are in the word but not guessed
         }
     });
 }
@@ -172,7 +167,6 @@ function addGuessToList(letter) {
     li.textContent = letter;
     guessesList.appendChild(li);
 }
-
 // Check win
 function checkWin() {
     return ["top", "left", "right", "bottom"].every(pos => {
@@ -183,8 +177,7 @@ function checkWin() {
             cells[gridMap[pos][4]].textContent === dailyBox[pos][4];
     });
 }
-
-// Reveal all words
+//Reveal all words
 function revealAll() {
     ["top", "left", "right", "bottom"].forEach(pos => {
         const word = dailyBox[pos];
