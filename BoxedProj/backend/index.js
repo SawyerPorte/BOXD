@@ -10,7 +10,7 @@ app.use(cors({
     origin: "https://boxd-5hg1.onrender.com"  // or specific URL for production
 }));
 
-const frontendPath = path.join(__dirname, '../frontend/index.html');
+const frontendPath = path.join(__dirname, '../frontend/app.js');
 app.use(express.static(frontendPath));
 
 // Catch-all for SPA routing
