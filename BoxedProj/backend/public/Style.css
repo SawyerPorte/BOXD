@@ -123,3 +123,28 @@ ul {
     list-style: none;
     padding: 0;
 }
+
+@media (max-width: 600px) {
+    #grid {
+        grid-template-columns: repeat(5, 60px); /* wider cells */
+        grid-template-rows: repeat(5, 60px);
+        gap: 6px;
+    }
+
+    .cell {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    #current-letter {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    #keyboard button.key {
+        padding: 10px 12px;
+        font-size: 18px;
+    }
+}
