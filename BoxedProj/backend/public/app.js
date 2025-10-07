@@ -154,8 +154,12 @@ function revealGuessLetter(letter) {
             const wordLetter = word[i];
 
             if (wordLetter === letter) {
-                cells[index].textContent = wordLetter;
-                cells[index].style.backgroundColor = "green";
+                const cell = cells[index];
+                cell.textContent = wordLetter;
+                // Remove any previous animation
+                cell.classList.remove("reveal");
+                void cell.offsetWidth; // trigger reflow to restart animation
+                cell.classList.add("reveal");
             }
             // Do NOT reveal letters that are in the word but not guessed
         }
