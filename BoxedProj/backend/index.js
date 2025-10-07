@@ -42,7 +42,7 @@ function seededRandom(seed) {
 function getDailySeed() {
     const today = new Date();
     console.log("Hours",today.getHours())
-    return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate() + 1;
     
 }
 function pickRandomFromList(list, seed) {
