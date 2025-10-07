@@ -10,12 +10,13 @@ app.use(cors({
     origin: "https://boxd-5hg1.onrender.com"  // or specific URL for production
 }));
 
-app.use(express.static(path.join(__dirname, '../frontend')));
+const frontendPath = path.join(__dirname, '../frontend');
+app.use(express.static(frontendPath));
 
-// Serve index.html on root
-//app.get('/*', (req, res) => {
-//    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-//});
+// Catch-all for SPA routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 // ---- WORD GENERATION LOGIC ----
 //let words = JSON.parse(fs.readFileSync('./words.json', 'utf8')).map(w => w.toUpperCase());
