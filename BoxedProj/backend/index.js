@@ -6,9 +6,7 @@ const path = require('path');
 
 const app = express();
 
-app.use(cors({
-    origin: "https://boxd-5hg1.onrender.com"  // or specific URL for production
-}));
+app.use(cors());
 
 
 // Serve all frontend files
