@@ -116,6 +116,7 @@ function handleGuess() {
     if (guessCount >= maxGuesses) {
         guessInput.disabled = true;
         guessBtn.disabled = true;
+        revealAll();
         alert("Game over! Check all correct letters on the grid.");
     }
 }
