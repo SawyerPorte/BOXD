@@ -53,6 +53,9 @@ async function loadDailyBox() {
     dailyBox = await res.json();
     console.log("Daily Box:", dailyBox);
 
+    const today = new Date();
+    console.log("Hours", today.getHours())
+
     //// Fetch the word list from your backend
     //const wordsRes = await fetch("https://boxd-5hg1.onrender.com/words.json");
     //wordsList = await wordsRes.json();
